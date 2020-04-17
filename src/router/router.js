@@ -4,6 +4,9 @@ const Login = () => import('../views/login/login')
 const Home = () => import('../views/home/Home')
 const Welcome = () => import('../views/home/childCpns/Welcome')
 const Users = () => import('../views/home/childCpns/Users')
+const Rights =() => import('../views/home/childCpns/power/Rights')
+const Roles = () => import('../views/home/childCpns/power/Roles');
+
 Vue.use(Router);
 
 // 2.创建router
@@ -28,6 +31,14 @@ const routes = [
       {
         path:'/users',
         component: Users
+      },
+      {
+        path: '/rights',
+        component: Rights
+      },
+      {
+        path: '/roles',
+        component: Roles
       }
     ]
   }
