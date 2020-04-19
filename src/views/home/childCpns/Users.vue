@@ -80,8 +80,8 @@
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="addForm.email"></el-input>
           </el-form-item>
-          <el-form-item label="手机" prop="phone">
-            <el-input v-model="addForm.phone"></el-input>
+          <el-form-item label="手机" prop="mobile">
+            <el-input v-model="addForm.mobile"></el-input>
           </el-form-item>
         </el-form>
 
@@ -98,7 +98,7 @@
         width="50%"
         @close="editDialogClosed"
       >
-        <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
+        <el-form :model="editForm" :rules="addFormRules" ref="editFormRef" label-width="70px">
           <el-form-item label="用户名">
             <el-input v-model="editForm.username" disabled></el-input>
           </el-form-item>
@@ -193,7 +193,7 @@ export default {
         username: '',
         password: '',
         email: '',
-        phone: ''
+        mobile: ''
       },
       //添加表单的验证规则对象
       addFormRules: {
@@ -222,7 +222,7 @@ export default {
           //自定义验证规则
           { validator: checkEmail, trigger: 'blur' }
         ],
-        phone: [
+        mobile: [
           { required: true, message: '请输入手机号', trigger: 'blur' },
           //自定义验证规则
           { validator: checkPhone, trigger: 'blur' }
@@ -233,16 +233,16 @@ export default {
       //查询到的用户信息
       editForm: {},
       //修改用户信息的校验规则
-      editFormRules: {
-        email: [
-          { required: true, message: '请输入邮箱', trigger: 'blur' },
-          { validator: checkEmail, trigger: 'blur' }
-        ],
-        mobile: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { validator: checkPhone, trigger: 'blur' }
-        ]
-      },
+      // editFormRules: {
+      //   email: [
+      //     { required: true, message: '请输入邮箱', trigger: 'blur' },
+      //     { validator: checkEmail, trigger: 'blur' }
+      //   ],
+      //   mobile: [
+      //     { required: true, message: '请输入手机号', trigger: 'blur' },
+      //     { validator: checkPhone, trigger: 'blur' }
+      //   ]
+      // },
       //控制分配角色的显示与隐藏
       setRoleDialogVisible: false,
       //需要被分配权限的用户信息
@@ -399,7 +399,9 @@ export default {
       this.$http.put(`users/${this.userInfo.id}/role`,{
         rid: this.selectRoleId
       }).then(res=>{
-        if(res.data.meta.status !== 200){
+        if(res.data.meta.status === 400){
+          return this.$message.error('不允许修改admin账号')
+        }else if(res.data.meta.status !== 200 ){
           return this.$message.error('分配角色失败')
         }
         this.$message.success('以更新角色信息')

@@ -109,7 +109,7 @@
 
     <!-- 编辑角色对话框 -->
     <el-dialog title="编辑角色" :visible.sync="editDialog" width="50%">
-      <el-form :model="editRolesForm" :rules="editRolesRules" ref="editRolesRef" label-width="70px">
+      <el-form :model="editRolesForm" :rules="addRolesRules" ref="editRolesRef" label-width="70px">
         <el-form-item label="角色名称" prop="roleName" label-width="80px">
           <el-input v-model="editRolesForm.roleName"></el-input>
         </el-form-item>
@@ -189,18 +189,18 @@ export default {
       //编辑角数据存放
       editRolesForm: {},
       //检验编辑角色表示数据
-      editRolesRules: {
-        roleName: [
-          { required: true, message: '请输入角色名称！', trigger: 'blur' },
-          {
-            require: true,
-            min: 2,
-            max: 10,
-            message: '长度在 2 到 10 个字符',
-            trigger: 'blur'
-          }
-        ]
-      },
+      // editRolesRules: {
+      //   roleName: [
+      //     { required: true, message: '请输入角色名称！', trigger: 'blur' },
+      //     {
+      //       require: true,
+      //       min: 2,
+      //       max: 10,
+      //       message: '长度在 2 到 10 个字符',
+      //       trigger: 'blur'
+      //     }
+      //   ]
+      // },
       //分配权限对话框展示和隐藏
       setRightDialogVisible: false,
       //所有权限数据
