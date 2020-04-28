@@ -29,3 +29,6 @@ body,
 .ql-editor{
   min-height: 300px;
 }
+.el-cascader-menu__list{
+  height: 250px;
+}
